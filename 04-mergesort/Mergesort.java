@@ -29,15 +29,11 @@ public class Mergesort {
 		output.add(b.remove(0));
 	    }
 	}
-	if (a.size() != 0){
-	    for (int i = 0; i < a.size(); i++){
-		output.add(a.remove(0));
-	    }
+	while (a.size() > 0){
+	    output.add(a.remove(0));
 	}
-	else if (b.size() != 0){
-	    for (int i = 0; i < b.size(); i++){
-		output.add(b.remove(0));
-	    }
+	while (b.size() > 0){
+	    output.add(b.remove(0));
 	}
 	return output;
     }
@@ -52,7 +48,7 @@ public class Mergesort {
 	System.out.println(m.merge(a,b));
 
 	System.out.println("\n~MergeSort~");
-	ArrayList<Integer> n = new ArrayList<Integer>(Arrays.asList(4,5,2,1,9));
+	ArrayList<Integer> n = new ArrayList<Integer>(Arrays.asList(4,5,2,1,9,23,21,21));
 	System.out.println("Original unsorted: " + n);
 	System.out.println("Sorted: " + m.msort(n));
     }
