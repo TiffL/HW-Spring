@@ -1,7 +1,24 @@
 import java.util.*;
-
 public class Mergesort {
 
+    public ArrayList<Integer> msort(ArrayList<Integer> L){
+	ArrayList<Integer> a = new ArrayList<Integer>();
+	ArrayList<Integer> b = new ArrayList<Integer>();
+	
+	if (L.size() == 1){
+	    return L;
+	}
+	else{
+	    for (int i = 0; i < L.size() / 2; i++){
+		a.add(L.get(i));
+	    }
+	    for (int i = L.size() / 2; i < L.size(); i++){
+		b.add(L.get(i));
+	    }
+	}
+	return merge(msort(a),msort(b));
+    }
+	    
     public ArrayList<Integer> merge(ArrayList<Integer> a, ArrayList<Integer> b){
 	ArrayList<Integer> output = new ArrayList<Integer>();
 	while (a.size() > 0 && b.size() > 0){
@@ -27,17 +44,16 @@ public class Mergesort {
 
     public static void main(String args[]) {
 	Mergesort m = new Mergesort();
-	ArrayList<Integer> a = new ArrayList<Integer>();
-	ArrayList<Integer> b = new ArrayList<Integer>();
-	a.add(1);
-	a.add(7);
-	a.add(8);
-	b.add(0);
-	b.add(2);
-	b.add(3);
-	b.add(9);
+	System.out.println("\n~Merge~");
+	ArrayList<Integer> a = new ArrayList<Integer>(Arrays.asList(1,7,8));
+	ArrayList<Integer> b = new ArrayList<Integer>(Arrays.asList(0,2,3,9));
 	System.out.println("a: " + a);
 	System.out.println("b: " + b + "\n");
 	System.out.println(m.merge(a,b));
+
+	System.out.println("\n~MergeSort~");
+	ArrayList<Integer> n = new ArrayList<Integer>(Arrays.asList(4,5,2,1,9));
+	System.out.println("Original unsorted: " + n);
+	System.out.println("Sorted: " + m.msort(n));
     }
 }
