@@ -1,20 +1,25 @@
+import java.io.*;
+import java.util.*;
 public class LList{
 
-    private Node l = new Node("Dummy");
+    private Node l = new Node(-1);
     private int len = 0;
 
-    public void add(String s){
+    public int size(){
+	return len;
+    }
+
+    public void add(int s){
 	Node tmp = new Node(s);
 	tmp.setNext(l.getNext());
 	l.setNext(tmp);
 	len += 1;
-	//System.out.println("len: " + len);
     }
 
     public String toString(){
 	String s = "";
 	Node tmp;;
-	for (tmp=l ; tmp!=null ; tmp=tmp.getNext()){
+	for (tmp = l; tmp != null; tmp = tmp.getNext()){
 	    s = s + tmp + " --> ";
 	}
 	s = s + "null";
@@ -22,38 +27,65 @@ public class LList{
     }
 
     //returns the value of the nth element of the linked list (n starts from 0)
-    public Node get(int n){
-	if (n >= -1 && n < len){
-	    Node current = l;
-	    for (int i = -1; i < n; i++){
-		current = current.getNext();
-	    }
-	    return current;
+    public int get(int n){
+	if (n < -1 || n >= len){
+	    throw new NoSuchElementException();
 	}
-	return null;
+	Node current = l;
+	for (int i = -1; i < n; i++){
+	    current = current.getNext();
+	}
+	return current.getData();
     }
 
     //inserts string s at location n
-    public void add(int n, String s){
-	if (n >= 0 && n < len){
-	    Node current = get(n-1);
-	    Node next = current.getNext();
-	    Node ins = new Node(s);
-	    current.setNext(ins);
-	    ins.setNext(next);
-	    len += 1;
-	    //System.out.println("len: " + len);
+    public void add(int n, int s){
+	if (n < 0 || n > len){
+	    throw new NoSuchElementException();
 	}
+	Node c = l;
+	for (int i = 0; i < n; i++){
+	    c = c.getNext();
+	}
+	Node next = c.getNext();
+	Node newN = new Node(s);
+	c.setNext(newN);
+	newN.setNext(next);	
+	len += 1;
     }
 
-    public void remove(int n){
-	if (n >= 0 && n < len){
-	    Node current = get(n-1);
-	    Node next = get(n).getNext();
-	    current.setNext(next);
-	    len -= 1;
-	    //System.out.println("len: " + len);
+    /*
+    public int remove(int n){
+	if (n < 0 || n > len){
+	    throw new NoSuchElementException();
 	}
+	Node c = l;
+	for (int i = 0; i < n; i++){
+	    c = c.getNext();
+	}
+	Node next = c.getNext();
+	c.setNext(c.getNext().getNext());
+	len -= 1;
+	return next.getData();
+    }
+    */
+
+    public boolean remove(int i){
+	if (i < 0 || i > len){
+	    throw new NoSuchElementException();
+	}
+	Node c = l;
+	c = c.getNext();
+
+	for (int j = 0; j < len; j++){
+	    if (c.getNext().getData() == i){
+	        c.setNext(c.getNext().getNext());
+		len -= 1;
+		return true;
+	    }
+	    c = c.getNext();
+	}
+	return false;
     }
 }
 
