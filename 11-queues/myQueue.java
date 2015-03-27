@@ -30,12 +30,12 @@ public class myQueue<E>{
 	return first.getNext()==null;
     }
 
-    public E head(){
-    }
-    
+    //public E head(){
+    //}
+
     public String toString(){
 	String s = "";
-	Node<E> tmp;
+	Node<E> tmp;;
 	for (tmp=first ; tmp!=null ; tmp=tmp.getNext()){
 	    s = s + tmp + " --> ";
 	}

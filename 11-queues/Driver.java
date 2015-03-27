@@ -22,6 +22,5 @@ public class Driver{
 	System.out.println("\n" + mq);
 	
 	System.out.println("\nEmpty? " + mq.empty());
-
     }
 }
