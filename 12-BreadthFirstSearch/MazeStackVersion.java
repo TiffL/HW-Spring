@@ -1,8 +1,6 @@
-import java.io.*;
-import java.util.*;
-public class Maze{
+public class MazeStackVersion extends Maze{
+    private myStack frontier = new myStack();
     private char[][] board;
-    private myQueue frontier = new myQueue();
     private Node current;
     private int maxX;
     private int maxY;
@@ -15,48 +13,22 @@ public class Maze{
     private char route = 'X';
     private boolean solved = false;
 
-    public void delay(int n){
-	try {
-	    Thread.sleep(n);
-	} catch (Exception e) {}
+    public MazeStackVersion(){
+	super();
+	board = super.getBoard();
+	maxX = super.getMaxX();
+	maxY = super.getMaxY();
     }
 
-    public Maze()
-    {
-	maxX=40;
-	maxY=20;
-	board = new char[maxX][maxY];
-	try {
-	    Scanner sc = new Scanner(new File("maze.dat"));
-	    int j=0;
-	    while (sc.hasNext()){
-		String line = sc.nextLine();
-		for (int i=0;i<maxX;i++)
-		    {
-			board[i][j] = line.charAt(i);
-		    }
-		j++;
-	    }
-	}
-	catch (Exception e){}
-    }
-    public String toString()
-    {
-	String s = "[2J\n";
-	for (int y=0;y<maxY;y++){
-	    for (int x=0;x<maxX;x++){
-		s = s+board[x][y];
-	    }
-	    s=s+"\n";
-	}
-	return s;
+    public String toString(){
+	return super.toString();
     }
 
     public void solve(int i, int j){
-	frontier.enqueue(i,j,null);
+	frontier.push(i,j,null);
 	System.out.println(frontier);
 	while (!frontier.empty() && solved == false){
-	    current = frontier.dequeue();
+	    current = frontier.pop();
 	    int x = current.getX();
 	    int y = current.getY();
 	    board[x][y] = visited;
@@ -85,26 +57,14 @@ public class Maze{
 	if (solved == false && x<maxX-1 && y<maxY-1 && board[x][y] != visited &&
 	    board[x][y] != wall && board[x][y] != processed){
 	    board[x][y] = processed;
-	    frontier.enqueue(x,y,previous);
+	    frontier.push(x,y,previous);
 	}
     }
 
-    public char[][] getBoard(){
-	return board;
-    }
-
-    public int getMaxX(){
-	return maxX;
-    }
-
-    public int getMaxY(){
-	return maxY;
-    }
-
     public static void main(String[] args){
-	Maze m = new Maze();
-	//System.out.println(m);
-	m.solve(1,1);
-	System.out.println(m);
+	MazeStackVersion s = new MazeStackVersion();
+	//System.out.println(s);
+	s.solve(1,1);
+	System.out.println(s);
     }
 }
