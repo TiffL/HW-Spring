@@ -1,4 +1,4 @@
-public class Tree{
+public class BST{
     private Node root = null;
     
     public Node search(Node T, Integer i){
@@ -66,7 +66,7 @@ public class Tree{
     }
 
     public static void main(String[] args){
-	Tree t = new Tree();
+	BST t = new BST();
 	Node n = new Node(new Integer(1));
 	t.insert(n,1);
 	//t.toString(n,'r',0," ");
