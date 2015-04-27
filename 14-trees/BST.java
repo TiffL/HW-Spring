@@ -1,39 +1,39 @@
 public class BST{
-    private Node root = null;
+    private Node r = null;
     
-    public Node search(Node T, Integer i){
-	while (T != null){
-	    int c = T.getData().compareTo(i);
+    public Node search(Node t, int i){
+	while (t != null){
+	    int c = t.getData().compareTo(i);
 	    if (c == 0){
-		return T;
+		return t;
 	    }
 	    else if (c > 0){
-		T = T.getRight();
+		t = t.getRight();
 	    }
 	    else{
-		T = T.getLeft();
+		t = t.getLeft();
 	    }
 	}
 	return null;
     }
 
-    public void insert(Node T, Integer i){
+    public void insert(Node t, int i){
 	Node n = new Node(i);
-	if (T == null){
-	    T = n;
+	if (t == null){
+	    t = n;
 	    return;
 	}
 	Node T2 = null;
-	while (T != null){
-	    T2 = T;
-	    if (i.compareTo(T2.getData())<0){
-		T = T2.getLeft();
+	while (t != null){
+	    T2 = t;
+	    if (T2.getData().compareTo(i) > 0){
+		t = T2.getLeft();
 	    }
 	    else{
-		T = T2.getRight();
+		t = T2.getRight();
 	    }
 	}
-	if (i.compareTo(T2.getData()) < 0){
+	if (T2.getData().compareTo(i) > 0){
 	    T2.setLeft(n);
 	}
 	else{
