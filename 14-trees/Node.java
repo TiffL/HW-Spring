@@ -2,6 +2,12 @@ public class Node{
     private Integer data;
     private Node left, right;
     
+    public Node(Integer d){
+	data = d;
+	left = null;
+	right = null;
+    }
+    
     public void setLeft(Node l){
 	left = l;
     }
