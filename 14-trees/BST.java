@@ -1,6 +1,6 @@
 public class BST{
     private Node r = null;
-    
+
     public Node search(Node t, int i){
 	while (t != null){
 	    int c = t.getData().compareTo(i);
@@ -41,39 +41,27 @@ public class BST{
 	}
     }
 
-    //work in progress
-    public String toString(Node n, char d, int level, String sp){
-	String spaces = sp;
-	if (n == null){
-	    return null;
-	}
-	else if (d == 'l' && n.getLeft() == null){
-	    return "" + n.getData();
-	}
-	else if (d == 'r' && n.getRight() == null){
-	    return "" + n.getData();
+    public String traverse(Node t){
+	if (t == null){
+	    return "";
 	}
 	else{
-	    spaces += spaces;
-	    String l,r;
-
-	    l = spaces+" L"+level+": "+toString(n.getLeft(),'l',level+1,spaces);
-	    r = "  R"+level+": "+toString(n.getRight(),'r',level+1,spaces)+"\n";
-	    System.out.println(l+r);
-
-	    return "" + n.getData();
+	    return traverse(t.getLeft())+
+		t.getData()+", "+
+		traverse(t.getRight());
 	}
+    }
+    
+    public String toString(){
+	return traverse(r);
     }
 
     public static void main(String[] args){
 	BST t = new BST();
 	Node n = new Node(new Integer(1));
 	t.insert(n,1);
-	//t.toString(n,'r',0," ");
 	t.insert(n,2);
-	//t.toString(n,'r',0," ");
 	t.insert(n,5);
-        t.toString(n,'r',0," ");
-
+	System.out.println(t);
     }
 }
