@@ -17,10 +17,11 @@ public class BST{
 	return null;
     }
 
-    public void insert(Node t, int i){
+    public void insert(int i){
 	Node n = new Node(i);
-	if (t == null){
-	    t = n;
+	Node t = r;
+	if (r == null){
+	    r = n;
 	    return;
 	}
 	Node T2 = null;
@@ -41,6 +42,48 @@ public class BST{
 	}
     }
 
+    public void remove(int i){
+	remove(r,i);
+    }
+
+    public void remove(Node s, int i){
+	Node T = s;
+	Node T2 = null;
+	while (T.getData() != i){
+	    T2 = T;
+	    if (T2.getData().compareTo(i) > 0){
+		T = T2.getLeft();
+	    }
+	    else{
+		T = T2.getRight();
+	    }
+	}
+	if (T2.getRight() == T){
+	    if (T.getRight() == null){
+		T2.setRight(T.getLeft());
+	    }
+	    else{
+		T2.setRight(T.getRight());
+	    }
+	}
+	else if (T2.getLeft() == T){
+	    if (T.getLeft() == null){
+		T2.setLeft(T.getRight());
+	    }
+	    else{
+		T2.setLeft(T.getLeft());
+	    }	    
+	}
+	else{
+	    Node L = T.getLeft();
+	    while (L.getRight() != null){
+		L = L.getRight();
+	    }
+	    T = L;
+	    remove(T.getLeft(),L.getData());
+	}
+    }
+
     public String traverse(Node t){
 	if (t == null){
 	    return "";
@@ -58,10 +101,14 @@ public class BST{
 
     public static void main(String[] args){
 	BST t = new BST();
-	Node n = new Node(new Integer(1));
-	t.insert(n,1);
-	t.insert(n,2);
-	t.insert(n,5);
+	t.insert(20);
+	t.insert(10);
+	t.insert(40);
+	t.insert(5);
+	t.insert(3);
+	t.insert(4);
+	System.out.println(t);
+	t.remove(4);
 	System.out.println(t);
     }
 }
