@@ -79,7 +79,7 @@ public class BST{
 	    while (L.getRight() != null){
 		L = L.getRight();
 	    }
-	    T = L;
+	    T.setData(L.getData());
 	    remove(T.getLeft(),L.getData());
 	}
     }
@@ -104,11 +104,11 @@ public class BST{
 	t.insert(20);
 	t.insert(10);
 	t.insert(40);
-	t.insert(5);
-	t.insert(3);
-	t.insert(4);
+	t.insert(7);
+	t.insert(13);
+	t.insert(17);
 	System.out.println(t);
-	t.remove(4);
+	t.remove(10);
 	System.out.println(t);
     }
 }
